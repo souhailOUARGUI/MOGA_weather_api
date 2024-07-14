@@ -24,7 +24,7 @@ usrRouter.get('/',async(req,res)=> {
 
 
 usrRouter.get('/:id',getUser,(req,res)=> {
-    res.send(res.user)
+    res.json(res.user)
   }
   );
 
@@ -40,7 +40,7 @@ usrRouter.post('/',(req,res)=> {
   })
   try {
     const newUser = user.save();
-    res.status(201).json(newUser);
+    res.status(201).json({message: "user created"});
   } catch (error) {
     res.status(400).json({message: error.message});
   }
@@ -51,16 +51,29 @@ usrRouter.post('/',(req,res)=> {
 
 
 
-usrRouter.patch('/:id',(req,res)=> {
-    
+usrRouter.patch('/:id',getUser,async (req,res)=> {
+  res.user.name = req.body.name;
+  res.user.role = req.body.role;
+    try {
+      const updatedUser = await res.user.save();
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(400).json({message: error.message})
+    }
+
 })
 
 
 // deleting one
 
 
-usrRouter.delete('/:id',(req,res)=> {
+usrRouter.delete('/:id',getUser,async (req,res)=> {
     
+  try {
+    await res.user.deleteOne().then(()=> res.json({message: "User Deleted"}));
+  } catch (error) {
+    res.status(500).json({message: error.message});
+  }
 })
 
 
@@ -71,7 +84,6 @@ async function getUser(req,res,next){
     user = await User.findById(req.params.id)
     if (user == null) {
       return res.status(404).json({message: 'cannot find user'});
-      
     }
   } catch (error) {
     
