@@ -3,18 +3,28 @@ const app = express()
 const messagesRouter = require('./routes/metars')
 const usersRouter = require('./routes/users')
 const env = require('dotenv').config()
+const socketIO = require('socket.io')
 
 const mongoose = require('mongoose')
 
+//********** DB connection ************/
 mongoose
   .connect(process.env.dbURL)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
 app.use(express.json())
 
-//managing routes
-
+//********** routes managment ************/
 app.use('/messages', messagesRouter)
 app.use('/users', usersRouter)
 
-app.listen(3000, console.log('server started'))
+const server = app.listen(3000, () =>
+  console.log(`server started, listening to port ${3000}`)
+)
+
+// socket handler
+const socketHandler = socketIO(server)
+
+socketHandler.on('connection', () => {
+  console.log('client connected')
+})
