@@ -25,6 +25,12 @@ const server = app.listen(3000, () =>
 // socket handler
 const socketHandler = socketIO(server)
 
-socketHandler.on('connection', () => {
+socketHandler.on('connection', (socket) => {
   console.log('client connected')
+  socket.on('sendMessage', (msg) => {
+    // console.log(msg)
+    socket.broadcast.emit('mobile', msg)
+    // socket.emit('sendMessage', 'hello testing event')
+  })
+  socket.on('disconnect', () => console.log('client disconnected'))
 })
