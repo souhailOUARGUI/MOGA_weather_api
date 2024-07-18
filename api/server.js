@@ -1,20 +1,24 @@
 const express = require('express')
-const app = express()
-
+const cors = require('cors');
 const env = require('dotenv').config()
 const socketIO = require('socket.io')
-
 const mongoose = require('mongoose')
+
+const app = express()
+const port = 3000;
+
 
 //********** DB connection ************/
 mongoose
   .connect(process.env.dbURL)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
+
+app.use(cors())
 app.use(express.json())
 
-const server = app.listen(3000, () =>
-  console.log(`server started, listening to port ${3000}`)
+const server = app.listen(port, () =>
+  console.log(`server started, listening to port ${port}`)
 )
 
 // socket handler

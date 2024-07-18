@@ -19,15 +19,15 @@ const fetchMetar = async (req, res) => {
 const createMetar = async (req, res, socketHandler) => {
   const message = new Metar({
     message: req.body.message,
-    timestamp: Date.now(),
+    timestamp: req.body.timestamp,
     type: req.body.type,
     station: req.body.station,
     wind_direction: req.body.wind_direction,
     wind_speed: req.body.wind_speed,
-    wind_gust: req.body.wind_gust,
+    wind_unit: req.body.wind_unit,
     visibility: req.body.visibility,
     weather: req.body.weather,
-    cloud_coverage: req.body.cloud_coverage,
+    // cloud_coverage: req.body.cloud_coverage,
     temperature: req.body.temperature,
     dew_point: req.body.dew_point,
     pressure: req.body.pressure,
