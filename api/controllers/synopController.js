@@ -35,6 +35,7 @@ const createSynop = async (req, res) => {
   try {
     const newMessage = await message.save()
     res.json({ message: 'message created' })
+    socketHandler.emit('mobile', newMessage)
   } catch (error) {
     res.status(400).json({ message: error.Message })
   }

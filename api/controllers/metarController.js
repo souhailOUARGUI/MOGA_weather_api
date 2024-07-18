@@ -16,7 +16,7 @@ const fetchMetar = async (req, res) => {
 }
 
 //creating a metar
-const createMetar = async (req, res) => {
+const createMetar = async (req, res, socketHandler) => {
   const message = new Metar({
     message: req.body.message,
     timestamp: Date.now(),
@@ -36,6 +36,7 @@ const createMetar = async (req, res) => {
   try {
     const newMessage = await message.save()
     res.json({ message: 'message created' })
+    socketHandler.emit('mobile', newMessage)
   } catch (error) {
     res.status(400).json({ message: error.Message })
   }

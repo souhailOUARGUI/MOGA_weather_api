@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
-const messagesRouter = require('./routes/metars')
-const usersRouter = require('./routes/users')
+
 const env = require('dotenv').config()
 const socketIO = require('socket.io')
 
@@ -13,10 +12,6 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
 app.use(express.json())
-
-//********** routes managment ************/
-app.use('/messages', messagesRouter)
-app.use('/users', usersRouter)
 
 const server = app.listen(3000, () =>
   console.log(`server started, listening to port ${3000}`)
@@ -34,3 +29,11 @@ socketHandler.on('connection', (socket) => {
   })
   socket.on('disconnect', () => console.log('client disconnected'))
 })
+
+//********** routes managment ************/
+
+const messagesRouter = require('./routes/metars')(socketHandler)
+const usersRouter = require('./routes/users')
+
+app.use('/messages', messagesRouter)
+app.use('/users', usersRouter)
