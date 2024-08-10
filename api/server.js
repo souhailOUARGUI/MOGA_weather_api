@@ -3,10 +3,13 @@ const cors = require('cors');
 const env = require('dotenv').config()
 const socketIO = require('socket.io')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
 
 const app = express()
 const port = 3000;
 
+
+app.use(bodyParser.json());
 
 //********** DB connection ************/
 mongoose
@@ -14,9 +17,10 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
 
-app.use(cors())
-app.use(express.json())
 
+app.use(express.json())
+app.use(cors())
+  
 const server = app.listen(port, () =>
   console.log(`server started, listening to port ${port}`)
 )
