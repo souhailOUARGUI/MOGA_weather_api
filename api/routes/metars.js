@@ -4,7 +4,6 @@ const metarController = require('../controllers/metarController')
 const synopController = require('../controllers/synopController')
 
 /////*******************************   METARS   ************************ */
-
 module.exports = (socketHandler) => {
   // getting all
   msgRouter.get('/metars', metarController.fetchMetars)
@@ -15,7 +14,6 @@ module.exports = (socketHandler) => {
     metarController.getMetar,
     metarController.fetchMetar
   )
-
   // creating one
 
   msgRouter.post('/metars', (req, res) => {

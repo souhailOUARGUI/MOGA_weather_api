@@ -3,7 +3,7 @@ const { Metar } = require('../models/message')
 //getting Metars
 const fetchMetars = async (req, res) => {
   try {
-    const messages = await Metar.find()
+    const messages = await Metar.find().sort({"timestamp":-1})
     res.json(messages)
   } catch (error) {
     res.status(400).json({ message: error.message })
@@ -53,7 +53,7 @@ const updateMetar = async (req, res) => {
   res.msg.wind_gust = req.body.wind_gust
   res.msg.visibility = req.body.visibility
   res.msg.weather = req.body.weather
-  res.msg.cloud_coverage = req.body.cloud_coverage
+  // res.msg.cloud_coverage = req.body.cloud_coverage
   res.msg.temperature = req.body.temperature
   res.msg.dew_point = req.body.dew_point
   res.msg.pressure = req.body.pressure

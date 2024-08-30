@@ -15,7 +15,7 @@ const fetchSynop = async (req, res) => {
 }
 
 //creating a Synop
-const createSynop = async (req, res) => {
+const createSynop = async (req, res, socketHandler) => {
   const message = new Synop({
     message: req.body.message,
     timestamp: Date.now(),

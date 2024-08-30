@@ -5,9 +5,9 @@ const socketIO = require('socket.io')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 
+
 const app = express()
 const port = 3000;
-
 
 app.use(bodyParser.json());
 
@@ -22,14 +22,15 @@ app.use(express.json())
 app.use(cors())
   
 const server = app.listen(port, () =>
-  console.log(`server started, listening to port ${port}`)
+ {console.log(`server started, listening to port ${port}`);
+ }
 )
 
 // socket handler
 const socketHandler = socketIO(server)
 
 socketHandler.on('connection', (socket) => {
-  console.log('client connected')
+  // console.log('client connected')
   socket.on('sendMessage', (msg) => {
     // console.log(msg)
     socket.broadcast.emit('mobile', msg)
