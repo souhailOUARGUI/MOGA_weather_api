@@ -36,7 +36,9 @@ socketHandler.on('connection', (socket) => {
     socket.broadcast.emit('mobile', msg)
     // socket.emit('sendMessage', 'hello testing event')
   })
-  socket.on('disconnect', () => console.log('client disconnected'))
+  socket.on('disconnect', () => {
+    // console.log('client disconnected')
+  })
 })
 
 //********** routes managment ************/
