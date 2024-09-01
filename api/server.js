@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 //********** DB connection ************/
 mongoose
-  .connect("mongodb+srv://ouargui550:oex7eE86AxMhM6I8@cluster0.z7aey.mongodb.net/mogameteo")
+  .connect(process.env.dbURL)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
 
