@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 
 const render_url = `https://moga-weather-api.onrender.com`; //Render URL
-const render_interval = 60000; // Interval in milliseconds (60 seconds)
+const render_interval = 60000 * 5; // Interval in milliseconds (60 seconds)
 
 
 const app = express()
