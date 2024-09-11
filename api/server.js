@@ -4,7 +4,7 @@ const env = require('dotenv').config()
 const socketIO = require('socket.io')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
-import axios from "axios";
+const  axios = require("axios"); 
 
 
 const render_url = `https://moga-weather-api.onrender.com`; //Render URL
