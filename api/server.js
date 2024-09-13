@@ -4,11 +4,13 @@ const env = require('dotenv').config()
 const socketIO = require('socket.io')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
-const  axios = require("axios"); 
+// const  axios = require("axios"); 
+const axios =  require("axios"); 
 
 
-const render_url = `https://moga-weather-api.onrender.com`; //Render URL
-const render_interval = 60000 * 5; // Interval in milliseconds (60 seconds)
+const render_url = `https://moga-weather-api.onrender.com/users`; //Render URL
+const render_interval = 60000  ; // Interval in milliseconds (60 seconds)
+
 
 
 const app = express()
