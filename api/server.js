@@ -51,7 +51,7 @@ socketHandler.on('connection', (socket) => {
 
 //********** routes managment ************/
 
-const messagesRouter = require('./routes/metars')(socketHandler)
+const messagesRouter = require('./routes/metars_synops')(socketHandler)
 const usersRouter = require('./routes/users')
 
 app.use('/messages', messagesRouter)
